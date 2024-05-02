@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+$colorPrincipal: #ad0c0f;
+
+// IMPORTANDO LAS OTRAS HOJAS DE SCSS
+@import 'main';
+@import 'library';
+
+body{
+    background-color: #f2f2f2;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+// NAVBAR
+
+header{
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    border-bottom: 2px solid $colorPrincipal;
+    padding: 0 10%;
+    padding-top: 20px;
+    .navBar{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .navBar__tittle{
+            padding: 10px;
+            h1{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #000;
+                font-weight: 600;
+            }
+        }
+        .navBar__library{
+            padding: 10px;
+            button{
+                padding: 5px 15px;
+                border-radius: 10px;
+                border: 2px solid #000;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.navBar__library-btn:hover{
+    cursor: pointer;
+    color: #fff;
+    background-color: #000000;    
+}
+
+.container{
+    // background-color: #ad0c0f;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+}
+
+// RESPONSIVE
+@media  screen and (max-width:650px){
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
