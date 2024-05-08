@@ -10,6 +10,8 @@ const btnLibrary = document.querySelector('#library');
 const libraryContainer = document.querySelector(".containerLibrary");
 
 const myPlaylist = document.querySelector(".library__songs");
+const cancionActual = document.querySelector('.song');
+
 
 
 // DESPLEGAR MENU DE LIBRERIA
@@ -24,7 +26,7 @@ let playlist = [
         id: 1,
         artist: "Limp Bizkit",
         name: "Break Stuff",
-        audio: 'Audio/Limp Bizkit Break Stuff Official Music Video.mp3',
+        audio: 'Audio/Limp Bizkit Break Stuff Official Music Video',
         image: 'img/BreakStuff.jpg'
     },
     {
@@ -69,17 +71,44 @@ const getPlaylist = (canciones) => {
 
     const songs = canciones.map((song) => {
         return `
-        <div class="library__songs__song">
+        <div class="library__songs__song" id="${song.id}">
             <img src="${song.image}" alt=""/>
             <div class="library__songs__song-info">
                 <p>${song.name}</p>
                 <p>${song.artist}</p>
             </div>
-        </div>`        
+        </div>`     
     })
     myPlaylist.innerHTML = songs.join(' ');
 }
+
 getPlaylist(playlist)
+
+const mysongs = document.querySelectorAll(".library__songs__song");
+for(let i = 0;i<mysongs.length;i++){
+    mysongs[i].addEventListener('click',()=>{
+        console.log(`name: ${playlist[i].name} \nartis: ${playlist[i].artist} \naudio: ${playlist[i].audio}`);
+        // console.log(cancionActual);  
+        let sourceSong = playlist[i].audio;
+        console.log(sourceSong);
+        cancionActual.innerHTML=`
+            <div class="song">
+            <audio class="currentSong">
+                <source src="${sourceSong}" type="audio/mpeg"  title=" ${playlist[i].name} ">
+            </audio>
+            <section class="playerContainer">
+                <div class="songInfo">
+                    <div class="songInfo-img">
+                        <img src="${playlist[i].image}" alt="">
+                    </div>
+                    <h2>${playlist[i].name}</h2>
+                    <h4>${playlist[i].artist}</h4>
+                </div>
+            </section>
+        </div>
+        `        
+    })
+}
 
 let isPlaying = false;
 
@@ -88,16 +117,16 @@ button.addEventListener('click', () => {
     if (isPlaying == false) {
         song.play()
         isPlaying = true;
-        console.log("Play")
+        // console.log("Play")
 
     } else {
         song.pause();
         isPlaying = false;
-        console.log("Paused");
+        // console.log("Paused");
     }
     let title = songName.innerText = song.childNodes[1].title;
     let guion = title.indexOf("-")
-    console.log(guion)
+    // console.log(guion)
     title = songName.innerText = song.childNodes[1].title.slice((guion + 1), -1);
     let Artist = songArtist.innerText = song.childNodes[1].title.slice(0, (guion - 2) + 2);
 })
